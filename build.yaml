@@ -20,4 +20,4 @@
 ---
 include:
   - board: nice_nano
-    shield: my_keyboard
+    shield: SHIELD_MY_KEYBOARD
