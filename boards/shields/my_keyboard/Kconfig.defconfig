@@ -4,4 +4,8 @@ if SHIELD_MY_KEYBOARD
 config ZMK_KEYBOARD_NAME
     default "My Keyboard"
 
+# マウス機能を有効化
+config ZMK_MOUSE
+     Pel_bool y
+    default y
 endif
