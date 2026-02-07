@@ -1,24 +1,33 @@
 / {
-    chosen {
-        zmk,kscan = &kscan0;
-    };
+    kscan0: kscan0 {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";
+        wakeup-source;
 
-    /* ボタン（押し込みクリック用） */
-    kscan0: kscan_0 {
-        compatible = "zmk,kscan-gpio-direct";
-        input-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-    };
+        col-gpios
+            = <&pro_micro 15 GPIO_ACTIVE_HIGH>
+            ;
 
-    /* アナログスティックの電圧を読み取る設定 */
-    zephyr,user {
-        io-channels = <&adc 0>, <&adc 5>; // P0.02(AIN0) と P0.29(AIN5)
+        row-gpios
+            = <&pro_micro 19 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            ;
     };
 };
 
-&adc {
-    status = "okay";
-};
+
 #include <dt-bindings/zmk/matrix_transform.h> // Put this with the other includes at the top of your overlay
+
+/ {
+    default_transform: keymap_transform0 {
+        compatible = "zmk,matrix-transform";
+        columns = <1>; // Length of the "col-gpios" array
+        rows = <1>; // Length of the "row-gpios" array
+        map = <
+        //   Key 1 
+            RC(0,0)
+        >;
+    };
+};
 
 / {
     physical_layout0: physical_layout_0 { // First physical layout, use different naming for other layouts
