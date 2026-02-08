@@ -28,6 +28,7 @@
         y-input-code = <INPUT_REL_Y>;
         scale-multiplier = <1>;     // カーソルの速さ。遅ければ 2 や 3 に増やす
         scale-exponent = <1>;       // 加速感。1は等速
+        status = "okay";
     };
 
     keymap {
@@ -39,7 +40,7 @@
             // |     A     |     B     |     C     |
             // |     D     |     E     |     F     |
             bindings = <
-                &kp Z    &kp M    &kp K
+                &mkp LCLK    &kp M    &kp K
                 &kp A    &kp B    &kp C
                 &kp D    &mmv MOVE_DOWN    &kp F
             >;
