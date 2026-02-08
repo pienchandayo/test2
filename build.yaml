@@ -18,21 +18,7 @@
 #     artifact-name: corne_left_with_studio
 #
 ---
-manifest:
-  remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
-    # マウス機能の権威である Petejohanson氏のリモートを追加
-    - name: petejohanson
-      url-base: https://github.com/petejohanson
-  projects:
-    - name: zmk
-      remote: petejohanson
-      # マウス移動（mmv）やリスナーが実装されている専用ブランチを指定
-      revision: feat/pointers-move-scroll
-      import: app/west.yml
-  self:
-    path: config
+
 include:
   - board: nice_nano
     shield: my_keyboard
