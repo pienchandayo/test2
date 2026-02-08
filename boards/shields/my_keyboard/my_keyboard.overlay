@@ -46,27 +46,16 @@
 };
 
 / {
-    /* アドレス管理を必要としない「入れ物」を作る */
-    input_configs {
-        compatible = "zmk,input-listener"; // 適当な互換名で括る
-
-        virtual_input_joystick: virtual_input_joystick {
-            compatible = "zmk,input-split";
-            device = <&pd0>;
-            /* ここなら reg を書かなくてもエラーになりません */
-        };
+    /* 「joystick_split:」というラベルを確実に付ける */
+    joystick_split: virtual_input_joystick {
+        compatible = "zmk,input-split";
+        device = <&pd0>;
     };
 
     pd0: analog_stick {
         compatible = "zmk,input-analog-axis";
-        /* nice!nanoのADC対応ピンを指定 */
-        gpios = <&pro_micro 2 (GPIO_ACTIVE_HIGH)>, // X軸 (A0)
-                <&pro_micro 3 (GPIO_ACTIVE_HIGH)>; // Y軸 (A1)
+        /* nice!nano ADC pins */
+        gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH)>, 
+                <&gpio0 3 (GPIO_ACTIVE_HIGH)>;
     };
-};
-
-/* スティックの感度設定 */
-&pd0 {
-    status = "okay";
-    sampling-interval = <10>; // 10msごとに読み取り
 };
