@@ -12,17 +12,6 @@
 
 / {
 
-    /* アナログ値をマウスの相対移動(REL)に変換する設定 */
-    joystick_listener: joystick_listener {
-        compatible = "zmk,input-behavior-listener";
-        device = <&joystick_split>; // overlayで定義した名前
-        layers = <0>;               // 全レイヤーで有効にする場合
-        evt-type = <INPUT_EV_REL>;  // 相対移動（マウス）
-        x-input-code = <INPUT_REL_X>;
-        y-input-code = <INPUT_REL_Y>;
-        scale-multiplier = <1>;     // 速すぎる場合はここを調整
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
