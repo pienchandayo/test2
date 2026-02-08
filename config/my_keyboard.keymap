@@ -21,7 +21,7 @@
         scale-multiplier = <1>;     // カーソルの速さ。遅ければ 2 や 3 に増やす
         scale-exponent = <1>;       // 加速感。1は等速
     };
-    
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -33,7 +33,7 @@
             bindings = <
                 &kp Z    &kp M    &kp K
                 &kp A    &kp B    &kp C
-                &kp D    &kp E    &kp F
+                &kp D    &mmv MOVE_DOWN    &kp F
             >;
         };
     };
