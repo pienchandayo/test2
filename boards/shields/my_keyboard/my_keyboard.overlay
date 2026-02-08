@@ -45,3 +45,24 @@
     };
 };
 
+/ {
+    /* 入力イベントをまとめる仮想デバイス */
+    joystick_split: virtual_input_joystick {
+        compatible = "zmk,input-split";
+        device = <&pd0>;
+    };
+
+    /* アナログスティック本体の定義 */
+    pd0: analog_stick {
+        compatible = "zmk,input-analog-axis";
+        /* nice!nanoのADC対応ピン（例: A0, A1）を指定 */
+        gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH)>, // X軸 (P0.02 / A0)
+                <&gpio0 3 (GPIO_ACTIVE_HIGH)>; // Y軸 (P0.03 / A1)
+    };
+};
+
+/* スティックの感度設定 */
+&pd0 {
+    status = "okay";
+    sampling-interval = <10>; // 10msごとに読み取り
+};
