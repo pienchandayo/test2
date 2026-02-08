@@ -46,18 +46,21 @@
 };
 
 / {
-    /* compatible を消して、純粋な入れ物にする */
+    /* 階層構造は維持しつつ、reg に有効な値（アドレス0, サイズ1）を与えます */
     input_configs {
-        /* ここで reg エラーを回避 */
+        #address-cells = <1>;
+        #size-cells = <1>;
+
         joystick_split: virtual_input_joystick {
             compatible = "zmk,input-split";
             device = <&pd0>;
+            reg = <0 1>; // これで「reg必須」「サイズ0禁止」の両方をクリアします
         };
     };
 
     pd0: analog_stick {
         compatible = "zmk,input-analog-axis";
-        gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH)>, // X軸
-                <&gpio0 3 (GPIO_ACTIVE_HIGH)>; // Y軸
+        gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH)>, 
+                <&gpio0 3 (GPIO_ACTIVE_HIGH)>;
     };
 };
