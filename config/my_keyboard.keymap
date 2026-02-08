@@ -40,7 +40,7 @@
             // |     A     |     B     |     C     |
             // |     D     |     E     |     F     |
             bindings = <
-                &mkp LCLK    &kp M    &kp K
+                &mkp LCLK    &bt BT_CLR    &kp K
                 &kp A    &kp B    &kp C
                 &kp D    &mmv MOVE_DOWN    &kp F
             >;
