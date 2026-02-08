@@ -1,4 +1,3 @@
-//K scan setting 
 {
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
