@@ -50,6 +50,7 @@
     joystick_split: virtual_input_joystick {
         compatible = "zmk,input-split";
         device = <&pd0>;
+        reg = <0>;
     };
 
     /* アナログスティック本体の定義 */
