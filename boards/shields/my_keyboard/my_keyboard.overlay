@@ -18,6 +18,22 @@
     };
 };
 
+/ {
+    /* ジョイスティックの軸設定 */
+    joystick_split: virtual_input_joystick {
+        compatible = "zmk,input-split";
+        device = <&pd0>; // ポインティングデバイスの参照
+    };
+
+    pd0: analog_stick {
+        compatible = "zmk,input-analog-axis";
+        /* 接続したピンに合わせて設定（例: P0.02, P0.03など） */
+        gpios = <&pro_micro 8 (GPIO_ACTIVE_HIGH)>, // X軸
+                <&pro_micro 9 (GPIO_ACTIVE_HIGH)>; // Y軸
+    };
+};
+
+
 
 #include <dt-bindings/zmk/matrix_transform.h> // Put this with the other includes at the top of your overlay
 
