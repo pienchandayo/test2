@@ -57,4 +57,9 @@
         compatible = "zmk,input-split";
         device = <&pd0>;
     };
+    joystick_listener {
+        compatible = "zmk,input-listener";
+        device = <&pd0>; // 上で定義したアナログスティックのデバイスを指定
+        input-processors = <&zip_xy_scaler 1 1>; // 1:1倍で移動量に変換
+    };
 };
