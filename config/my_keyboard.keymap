@@ -11,7 +11,17 @@
 };
 
 / {
-
+    joystick_listener: joystick_listener {
+        compatible = "zmk,input-behavior-listener";
+        device = <&joystick_split>;
+        layers = <0>;
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
+        scale-multiplier = <1>;     // カーソルの速さ。遅ければ 2 や 3 に増やす
+        scale-exponent = <1>;       // 加速感。1は等速
+    };
+    
     keymap {
         compatible = "zmk,keymap";
 
