@@ -1,6 +1,15 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/mouse.h>
+
+
+&pd0 {
+    status = "okay";
+    sampling-interval = <10>;
+    scale-multiplier = <1>;
+    deadzone = <100>;
+};
+
 / {
     keymap {
         compatible = "zmk,keymap";
