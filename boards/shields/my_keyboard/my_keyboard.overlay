@@ -46,21 +46,18 @@
 };
 
 / {
-    /* 1. regエラーを回避するため、アドレス管理が不要なコンテナノードを作る */
+    /* compatible を消して、純粋な入れ物にする */
     input_configs {
-        compatible = "zmk,input-listener";
-        /* この中であれば reg を書かなくてもよくなります */
-
+        /* ここで reg エラーを回避 */
         joystick_split: virtual_input_joystick {
             compatible = "zmk,input-split";
             device = <&pd0>;
         };
     };
 
-    /* 2. アナログスティック本体の定義（ルート直下でOK） */
     pd0: analog_stick {
         compatible = "zmk,input-analog-axis";
-        gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH)>, // X軸 (A0)
-                <&gpio0 3 (GPIO_ACTIVE_HIGH)>; // Y軸 (A1)
+        gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH)>, // X軸
+                <&gpio0 3 (GPIO_ACTIVE_HIGH)>; // Y軸
     };
 };
