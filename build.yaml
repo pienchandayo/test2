@@ -21,6 +21,6 @@
 
 include:
   - board: nice_nano
-    shield: my_keyboard
+    shield: my_kb
     west-config-path: config/west.yml
     cmake-args: -DZMK_CONFIG=/github/workspace/config
