@@ -45,7 +45,3 @@
         transform = <&default_transform>; // Label of the matrix transform for this layout
     };
 };
-
-#include <dt-bindings/zmk/pointing.h>
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 1500  // default: 600
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 20    // default: 10
