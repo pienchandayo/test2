@@ -1,5 +1,3 @@
-#include <dt-bindings/zmk/mouse.h> // マウス用の定義を追加
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
@@ -20,11 +18,3 @@
         };
     };
  };
-
- &pd0 {
-    status = "okay";
-    /* 感度やデッドゾーンの調整 */
-    sampling-interval = <10>;
-    scale-multiplier = <1>;
-    deadzone = <100>;
-};
