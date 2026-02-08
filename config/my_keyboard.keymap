@@ -28,9 +28,3 @@
         };
     };
  };
-
-/* スティックの感度設定 */
-&pd0 {
-    status = "okay";
-    sampling-interval = <10>; // 10msごとに読み取り
-};
