@@ -37,30 +37,24 @@
 };
 
 / {
-    physical_layout0: physical_layout_0 { // First physical layout, use different naming for other layouts
+    physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
-        kscan = <&kscan0>; // Label of the kscan node, optional if all layouts use the same
-        transform = <&default_transform>; // Label of the matrix transform for this layout
+        kscan = <&kscan0>;
+        transform = <&default_transform>;
     };
-};
-/ {
-    /* 1. pd0の定義に必ずラベル「pd0:」をつける */
+
+    /* pd0 はルート直下に置くのが一般的です */
     pd0: analog_stick {
         compatible = "zmk,input-analog-axis";
+        /* 19(P0.02) と 20(P0.29) */
         gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH)>, 
                 <&gpio0 29 (GPIO_ACTIVE_HIGH)>;
     };
-    input_configs {
-        status = "okay";
-        #address-cells = <1>;
-        #size-cells = <0>; // サイズを0にする（これなら第2引数が不要）
 
-        /* 名前を @0 にし、reg も <0> にする。これで整合性が取れます */
-        joystick_split: virtual_input_joystick@0 {
-            compatible = "zmk,input-split";
-            device = <&pd0>;
-            reg = <0>; 
-        };
+    /* input_configs ではなく zmk,input-listener の仕様に合わせます */
+    joystick_split: virtual_input_joystick {
+        compatible = "zmk,input-split";
+        device = <&pd0>;
     };
 };
