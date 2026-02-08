@@ -11,7 +11,7 @@
 };
 
 / {
-    
+
     /* アナログ値をマウスの相対移動(REL)に変換する設定 */
     joystick_listener: joystick_listener {
         compatible = "zmk,input-behavior-listener";
@@ -39,3 +39,9 @@
         };
     };
  };
+
+/* スティックの感度設定 */
+&pd0 {
+    status = "okay";
+    sampling-interval = <10>; // 10msごとに読み取り
+};
