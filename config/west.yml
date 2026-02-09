@@ -1,9 +1,9 @@
 manifest:
   remotes:
     - name: zmkfirmware
-      url: https://github.com/zmkfirmware/zmk
+      url-base: https://github.com/zmkfirmware
     - name: ftas
-      url: https://github.com/ftas
+      url-base: https://github.com/ftas
   projects:
     - name: zmk
       remote: ftas
