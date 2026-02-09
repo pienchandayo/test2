@@ -67,7 +67,8 @@
     joystick_listener {
         compatible = "zmk,input-listener";
         device = <&pd0>;
-        xy-processors = <&zip_xy_scaler 5 1>; 
+        /* input-processors でも xy-processors でもない場合、これの可能性が高いです */
+        processors = <&zip_xy_scaler 5 1>; 
     };
 };
 
