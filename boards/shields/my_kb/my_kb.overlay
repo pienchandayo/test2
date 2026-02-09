@@ -48,33 +48,17 @@
     };
 };
 / {
-    /* 1. アナログスティック本体 */
     pd0: analog_stick {
         compatible = "zmk,input-analog-axis";
         io-channels = <&adc 0>, <&adc 5>; 
     };
 
-    /* 2. リスナー：behavior-listener 形式に変更 */
-    joystick_listener: joystick_listener {
-        compatible = "zmk,input-behavior-listener";
+    joystick_listener {
+        compatible = "zmk,input-listener";
         device = <&pd0>;
-        layers = <0>;
-        evt-type = <0x02>;        /* REL (マウス移動) */
-        x-input-code = <0x00>;    /* X軸 */
-        y-input-code = <0x01>;    /* Y軸 */
-        scale-multiplier = <5>;   /* ここで速度を調整（5倍） */
-        scale-exponent = <1>;     /* 加速感（1は等速） */
     };
 };
 
-&pd0 {
-    status = "okay";
-    sampling-interval-ms = <10>;
-    report-interval-ms = <10>;
-    deadzone = <100>;
-};
-
-/* スティックの詳細設定 */
 &pd0 {
     status = "okay";
     sampling-interval-ms = <10>;
