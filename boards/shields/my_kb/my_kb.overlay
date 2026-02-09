@@ -58,7 +58,9 @@
         device = <&pd0>;
     };
 };
-
+&adc {
+    status = "okay";
+};
 &pd0 {
     status = "okay";
     sampling-interval-ms = <10>;
