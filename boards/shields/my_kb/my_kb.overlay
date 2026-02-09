@@ -1,9 +1,12 @@
-
 #include <dt-bindings/zmk/mouse.h>
-#include <dt-bindings/zmk/matrix_transform.h> 
-
+#include <dt-bindings/zmk/matrix_transform.h>
 
 / {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,physical-layout = &layout0;
+    };
+
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
@@ -21,34 +24,23 @@
             , <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
     };
-};
 
-/ {
     default_transform: keymap_transform0 {
         compatible = "zmk,matrix-transform";
-        columns = <3>; // Length of the "col-gpios" array
-        rows = <3>; // Length of the "row-gpios" array
+        columns = <3>;
+        rows = <3>;
         map = <
-        //   Key 1 | Key 2 | Key 3
             RC(0,0) RC(0,1) RC(0,2)
-        //   Key 4 | Key 5 | Key 6
             RC(1,0) RC(1,1) RC(1,2)
-        //   Key 7 | Key 8 | Key 9
             RC(2,0) RC(2,1) RC(2,2)
         >;
-    };
-};
-
-/ {
-    chosen {
-        zmk,physical-layout = &layout0;
     };
 
     layout0: layout0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
-        /* キーマップとの紐付け用（後で必要になります） */
         transform = <&default_transform>;
+        kscan = <&kscan0>; // これを追加
     };
 
     /* アナログスティック本体 */
