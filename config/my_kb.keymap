@@ -38,10 +38,10 @@
  };
 
  / {
-    /* 1. アナログスティック本体の設定 */
+    /* 1. アナログスティック本体 */
     pd0: analog_stick {
         compatible = "zmk,input-analog-axis";
-        /* チャンネル番号を修正: P0.02=0, P0.29=5 */
+        /* P0.02はadc 0、P0.29はadc 5が正解です */
         io-channels = <&adc 0>, <&adc 5>; 
     };
 
@@ -49,20 +49,21 @@
     zip_xy_scaler: zip_xy_scaler {
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
-        type = <0x02>;        /* REL (相対移動) */
-        codes = <0x00 0x01>;  /* X軸, Y軸 */
+        type = <0x02>;        /* REL */
+        codes = <0x00 0x01>;  /* X, Y */
         track-remainders;
     };
 
-    /* 3. リスナー：スティックの入力をスケーラーに通してPCへ送る */
+    /* 3. リスナー：ここがエラーの原因でした */
     joystick_listener {
         compatible = "zmk,input-listener";
         device = <&pd0>;
-        input-processors = <&zip_xy_scaler 5 1>; /* 5倍速設定 */
+        /* 'input-processors' を 'xy-processors' に書き換えます */
+        xy-processors = <&zip_xy_scaler 5 1>; 
     };
 };
 
-/* スティックの詳細設定（単位に -ms を付けるのが正解） */
+/* スティックの詳細設定 */
 &pd0 {
     status = "okay";
     sampling-interval-ms = <10>;
