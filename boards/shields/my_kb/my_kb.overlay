@@ -47,6 +47,7 @@
     analog_stick: analog_stick {
         compatible = "zmk,input-analog-axis";
         io-channels = <&adc 0>, <&adc 5>;
+        status = "okay";
         sampling-interval-ms = <10>;
         report-interval-ms = <10>;
         deadzone = <100>;
