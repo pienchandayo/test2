@@ -40,19 +40,18 @@
 };
 
 / {
-    /* 1. chosenノード：ラベル「layout0」を参照するように修正 */
     chosen {
         zmk,physical-layout = &layout0;
     };
 
-    /* 2. 物理レイアウトの定義（名前の前に「layout0:」というラベルを付ける） */
     layout0: layout0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
-        /* transform（キーマップの行列変換）は、とりあえず無しでビルドを通します */
+        /* キーマップとの紐付け用（後で必要になります） */
+        transform = <&default_transform>;
     };
 
-    /* 3. アナログスティックの設定（ここはそのままでOK） */
+    /* アナログスティック本体 */
     analog_stick: analog_stick {
         compatible = "zmk,input-analog-axis";
         io-channels = <&adc 0>, <&adc 5>;
@@ -61,14 +60,14 @@
         deadzone = <100>;
     };
 
-    /* 4. マウスリスナー */
-    joystick_listener {
+    /* 入力リスナー */
+    joystick_listener: joystick_listener {
         compatible = "zmk,input-listener";
         device = <&analog_stick>;
     };
 };
 
-/* ADCを確実に有効化 */
+/* ADCドライバーの有効化 */
 &adc {
     status = "okay";
 };
