@@ -23,8 +23,6 @@
     };
 };
 
-
-
 / {
     default_transform: keymap_transform0 {
         compatible = "zmk,matrix-transform";
@@ -48,31 +46,35 @@
         kscan = <&kscan0>;
         transform = <&default_transform>;
     };
-
-    /* pd0 はルート直下に置くのが一般的です */
+};
+/ {
+    /* 1. アナログスティック本体の設定 */
     pd0: analog_stick {
         compatible = "zmk,input-analog-axis";
-        /* 19(P0.02) と 20(P0.29) */
-        io-channels = <&adc 0>, <&adc 7>; // 0=P0.02, 7=P0.29
+        io-channels = <&adc 0>, <&adc 5>; 
     };
-    /* input_configs ではなく zmk,input-listener の仕様に合わせます */
-    joystick_split: virtual_input_joystick {
-        compatible = "zmk,input-split";
-        device = <&pd0>;
-    };
+
+    /* 2. マウス移動の計算エンジン */
     zip_xy_scaler: zip_xy_scaler {
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
-        type = <0x02>;        /* INPUT_EV_REL を 0x02 に置換 */
-        codes = <0x00 0x01>;  /* X軸(0x00) と Y軸(0x01) を指定 */
+        type = <0x02>;
+        codes = <0x00 0x01>;
         track-remainders;
     };
 
-    /* リスナー設定 */
+    /* 3. リスナー：名前は xy-processors に統一！ */
     joystick_listener {
         compatible = "zmk,input-listener";
-        device = <&pd0>; 
-        input-processors = <&zip_xy_scaler 1 1>;
+        device = <&pd0>;
+        xy-processors = <&zip_xy_scaler 5 1>; 
     };
+};
 
+/* スティックの詳細設定 */
+&pd0 {
+    status = "okay";
+    sampling-interval-ms = <10>;
+    report-interval-ms = <10>;
+    deadzone = <100>;
 };
