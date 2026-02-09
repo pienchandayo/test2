@@ -40,36 +40,25 @@
 };
 
 / {
-    physical_layout0: physical_layout_0 {
-        compatible = "zmk,physical-layout";
-        display-name = "Default Layout";
-        kscan = <&kscan0>;
-        transform = <&default_transform>;
-    };
-};
-/ {
-    /* スティック本体 */
-    pd0: pd0 {
+    /* 1. スティックを直接ルート直下に定義 */
+    analog_stick: analog_stick {
         compatible = "zmk,input-analog-axis";
         io-channels = <&adc 0>, <&adc 5>;
+        sampling-interval-ms = <10>;
+        report-interval-ms = <10>;
+        deadzone = <100>;
+        status = "okay";
     };
 
-    /* マウスリスナー */
-    joystick_listener: joystick_listener {
+    /* 2. リスナー */
+    joystick_listener {
         compatible = "zmk,input-listener";
-        device = <&pd0>;
+        device = <&analog_stick>;
+        status = "okay";
     };
 };
 
-/* ADCドライバーを確実に有効化 */
+/* 3. ADC本体の有効化 */
 &adc {
     status = "okay";
-};
-
-/* スティックドライバーを実体化 */
-&pd0 {
-    status = "okay";
-    sampling-interval-ms = <10>;
-    report-interval-ms = <10>;
-    deadzone = <100>;
 };
