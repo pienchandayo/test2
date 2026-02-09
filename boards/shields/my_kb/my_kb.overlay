@@ -40,6 +40,9 @@
 };
 
 / {
+    chosen {
+        zmk,physical-layout = &layout_0;
+    };
     /* 1. スティックを直接ルート直下に定義 */
     analog_stick: analog_stick {
         compatible = "zmk,input-analog-axis";
