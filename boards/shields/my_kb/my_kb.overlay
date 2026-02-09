@@ -65,13 +65,16 @@
     zip_xy_scaler: zip_xy_scaler {
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
-        type = <INPUT_EV_REL>;
-        codes = <INPUT_REL_X INPUT_REL_Y>;
+        type = <0x02>;        /* INPUT_EV_REL を 0x02 に置換 */
+        codes = <0x00 0x01>;  /* X軸(0x00) と Y軸(0x01) を指定 */
         track-remainders;
     };
+
+    /* リスナー設定 */
     joystick_listener {
         compatible = "zmk,input-listener";
-        device = <&pd0>; // 上で定義したアナログスティックのデバイスを指定
-        input-processors = <&zip_xy_scaler 1 1>; // 1:1倍で移動量に変換
+        device = <&pd0>; 
+        input-processors = <&zip_xy_scaler 1 1>;
     };
+
 };
