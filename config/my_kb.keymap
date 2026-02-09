@@ -12,13 +12,6 @@
     time-to-max-speed-ms = <500>;
     acceleration-exponent = <1>;
 };
-&pd0 {
-    status = "okay";
-    sampling-interval = <10>;
-    scale-multiplier = <1>;
-    deadzone = <100>;
-};
-
 / {
     keymap {
         compatible = "zmk,keymap";
@@ -37,32 +30,32 @@
     };
  };
 / {
-    /* 1. アナログスティック本体の設定 */
+    /* 1. アナログスティックの定義 */
     pd0: analog_stick {
         compatible = "zmk,input-analog-axis";
-        /* nice!nano v2 の場合: P0.02(D0)=adc 0, P0.29(A1)=adc 5 です */
+        /* P0.02=adc 0, P0.29=adc 5 */
         io-channels = <&adc 0>, <&adc 5>; 
     };
 
-    /* 2. マウス移動の計算エンジン */
+    /* 2. 移動量の計算設定 */
     zip_xy_scaler: zip_xy_scaler {
         compatible = "zmk,input-processor-scaler";
         #input-processor-cells = <2>;
-        type = <0x02>;        /* REL (相対移動) */
-        codes = <0x00 0x01>;  /* X軸, Y軸 */
+        type = <0x02>;        /* REL */
+        codes = <0x00 0x01>;  /* X, Y */
         track-remainders;
     };
 
-    /* 3. リスナー：ここで 'xy-processors' を使うのが今回の肝です */
+    /* 3. リスナー（ここを一本化） */
     joystick_listener {
         compatible = "zmk,input-listener";
         device = <&pd0>;
-        /* エラー対策：input-processors ではなく xy-processors に変更 */
+        /* エラー回避のため xy-processors を使用 */
         xy-processors = <&zip_xy_scaler 5 1>; 
     };
 };
 
-/* スティックの詳細設定 */
+/* スティックの詳細設定（重複を削除） */
 &pd0 {
     status = "okay";
     sampling-interval-ms = <10>;
