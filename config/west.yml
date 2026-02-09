@@ -1,13 +1,13 @@
 manifest:
   remotes:
     - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
-    - name: ftas
-      url-base: https://github.com/ftas
+      url: https://github.com/zmkfirmware/zmk
+    - name: urob
+      url: https://github.com/urob/zmk
   projects:
     - name: zmk
-      remote: ftas
-      revision: mouse-fix
+      remote: urob
+      revision: v3.5
       import: app/west.yml
   self:
     path: config
