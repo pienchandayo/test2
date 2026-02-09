@@ -42,25 +42,4 @@
         transform = <&default_transform>;
         kscan = <&kscan0>; // これを追加
     };
-
-    /* アナログスティック本体 */
-    analog_stick: analog_stick {
-        compatible = "zmk,input-analog-axis";
-        io-channels = <&adc 0>, <&adc 5>;
-        status = "okay";
-        sampling-interval-ms = <10>;
-        report-interval-ms = <10>;
-        deadzone = <100>;
-    };
-
-    /* 入力リスナー */
-    joystick_listener: joystick_listener {
-        compatible = "zmk,input-listener";
-        device = <&analog_stick>;
-    };
-};
-
-/* ADCドライバーの有効化 */
-&adc {
-    status = "okay";
 };
