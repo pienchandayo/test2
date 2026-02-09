@@ -48,26 +48,25 @@
     };
 };
 / {
-    /* 1. スティック本体の定義 */
+    /* スティック本体 */
     pd0: pd0 {
         compatible = "zmk,input-analog-axis";
-        /* P0.02 (D0) = adc 0, P0.29 (A1) = adc 5 */
         io-channels = <&adc 0>, <&adc 5>;
     };
 
-    /* 2. リスナーの設定 */
-    joystick_listener {
+    /* マウスリスナー */
+    joystick_listener: joystick_listener {
         compatible = "zmk,input-listener";
         device = <&pd0>;
     };
 };
 
-/* 3. ADC本体を強制的に有効化 */
+/* ADCドライバーを確実に有効化 */
 &adc {
     status = "okay";
 };
 
-/* 4. スティックの動作パラメータ */
+/* スティックドライバーを実体化 */
 &pd0 {
     status = "okay";
     sampling-interval-ms = <10>;
