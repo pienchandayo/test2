@@ -22,12 +22,6 @@
     };
  };
 
-/* マウスの加速設定 */
-&mmv {
-    time-to-max-speed-ms = <500>;
-    acceleration-exponent = <1>;
-};
-
 / {
     keymap {
         compatible = "zmk,keymap";
