@@ -1,13 +1,15 @@
 manifest:
   remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
-    - name: urob
-      url-base: https://github.com/urob
+    ...
+    # START #####
+    - name: badjeff
+      url-base: https://github.com/badjeff
+    # END #######
   projects:
-    - name: zmk
-      remote: urob
+    ...
+    # START #####
+    - name: zmk-analog-input-driver
+      remote: badjeff
       revision: main
-      import: app/west.yml
-  self:
-    path: config
+    # END #######
+    ...
