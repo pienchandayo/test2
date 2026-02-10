@@ -80,12 +80,23 @@
 };
 
 &pointer_accel {
-    input-type = <INPUT_EV_REL>;
-    track-remainders;
-    min-factor = <100>;                 // (7)
-    max-factor = <10000>;               // (8)
-    speed-threshold = <1500>;           // (9)
-    speed-max = <1600>;                 // (10)
-    acceleration-exponent = <2>;        // (11)
+    input-type = <INPUT_EV_REL>;  // For relative input devices
+    track-remainders;             // Accumulate fractional movements
+    min-factor = <800>;          // 0.8x at very slow speeds
+    max-factor = <3000>;         // 3.0x at fast speeds
+    speed-threshold = <1200>;     // 1200 counts/sec for 1x
+    speed-max = <6000>;          // 6000 counts/sec for max accel
+    acceleration-exponent = <2>;  // Quadratic acceleration curve
 };
 
+/ {
+    tpad0: tpad0 {
+        compatible = "zmk,input-listener";
+        status = "okay";
+        device = <&glidepoint>;
+        input-processors = <
+            &pointer_accel      // Acceleration processor
+            &zip_xy_transform
+        >;
+    };
+};
