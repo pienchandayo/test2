@@ -93,7 +93,7 @@
     tpad0: tpad0 {
         compatible = "zmk,input-listener";
         status = "okay";
-        device = <anin0>;
+        device = <&anin0>;
         input-processors = <
             &pointer_accel      // Acceleration processor
             &zip_xy_transform
