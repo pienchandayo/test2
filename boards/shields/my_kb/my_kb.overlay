@@ -89,21 +89,3 @@
     acceleration-exponent = <2>;        // (11)
 };
 
-/{
-    split_inputs {
-        #address-cells = <1>;
-        #size-cells = <0>;
-        
-        split_peripheral: split_peripheral@0 {
-        compatible = "zmk,input-split";
-        reg = <0>;
-        device = <&anin0>; // アナログ入力ノードを指定
-        status = "okay";
-        input-processors
-            = <&pointer_accel> // ZMK Pointing Acceleration を適用
-            // , <&zip_xy_scaler 1 10> // オプション
-            , <&zip_xy_to_scroll_mapper> // スクロールとして使用
-            ;
-        };
-    };
-}
