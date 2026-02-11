@@ -56,7 +56,6 @@
             mv-deadzone = <100>;
             scale-multiplier = <1>;
             scale-divisor = <200>;
-            invert;
             evt-type = <INPUT_EV_REL>;
             input-code = <INPUT_REL_X>;
         };
@@ -67,7 +66,6 @@
             mv-deadzone = <100>;
             scale-multiplier = <1>;
             scale-divisor = <200>;
-            invert;
             evt-type = <INPUT_EV_REL>;
             input-code = <INPUT_REL_Y>;
         };
