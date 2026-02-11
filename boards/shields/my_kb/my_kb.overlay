@@ -98,7 +98,7 @@
 
     zip_xy_transform: zip_xy_transform {
         compatible = "zmk,input-processor-transform";
-        #input-processor-cells = <0>;
+        #input-processor-cells = <1>;
         type = <INPUT_EV_REL>;
         x-scale = <1>;
         y-scale = <1>;
