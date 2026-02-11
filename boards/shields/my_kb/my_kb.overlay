@@ -72,17 +72,6 @@
         };
     };
 
-    keymap {
-        compatible = "zmk,keymap";
-        default_layer {
-            bindings = <
-                &kp N1    &kp N2    &kp N3
-                &kp N4    &mkp LCLK &kp N6 
-                &kp N7    &kp N8    &kp N9
-            >;
-        };
-    };
-
     // --- ここが修正ポイント ---
     zip_xy_transform: zip_xy_transform {
         compatible = "zmk,input-processor-transform";
