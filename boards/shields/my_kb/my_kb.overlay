@@ -88,8 +88,6 @@
         compatible = "zmk,input-processor-transform";
         #input-processor-cells = <1>;
         type = <INPUT_EV_REL>;
-        x-factor = <1>;
-        y-factor = <1>;
     };
 
     tpad0: tpad0 {
