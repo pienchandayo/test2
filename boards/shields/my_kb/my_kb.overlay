@@ -50,7 +50,7 @@
         compatible = "zmk,analog-input";
         sampling-hz = <100>;
         x-ch {
-            io-channels = <&adc 5>; 
+            io-channels = <&adc 0>; 
             mv-mid = <1630>;
             mv-min-max = <1600>;
             mv-deadzone = <100>;
@@ -60,7 +60,7 @@
             input-code = <INPUT_REL_X>;
         };
         y-ch {
-            io-channels = <&adc 0>; 
+            io-channels = <&adc 5>; 
             mv-mid = <1630>;
             mv-min-max = <1600>;
             mv-deadzone = <100>;
@@ -72,6 +72,12 @@
         };
     };
 
+    // --- ここが修正ポイント ---
+    zip_xy_transform: zip_xy_transform {
+        compatible = "zmk,input-processor-transform";
+        #input-processor-cells = <1>;
+        type = <INPUT_EV_REL>;
+    };
 
     tpad0: tpad0 {
         compatible = "zmk,input-listener";
