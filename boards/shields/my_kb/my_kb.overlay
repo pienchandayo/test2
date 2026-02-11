@@ -1,10 +1,12 @@
 #include <dt-bindings/zmk/mouse.h>
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/zmk/keys.h> // キー入力用に必要
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <input/processors.dtsi>
 #include <behaviors/input_gestures_accel.dtsi>
+
 &adc {
-	status = "okay";
+    status = "okay";
 };
 
 / {
@@ -46,47 +48,60 @@
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
-        kscan = <&kscan0>; // これを追加
+        kscan = <&kscan0>;
     };
 
+    // アナログ入力（スティック）の設定
     anin0: analog_input_0 {
-    compatible = "zmk,analog-input";
-    sampling-hz = <100>;
-    x-ch {
-        io-channels = <&adc 5>; // <--- see ain-map.png for nRF52840
-        mv-mid = <1630>;
-        mv-min-max = <1600>;
-        mv-deadzone = <10>;
-        scale-multiplier = <1>;
-        scale-divisor = <70>;
-        invert;
-        evt-type = <INPUT_EV_REL>;
-        input-code = <INPUT_REL_X>;
-    };
-    y-ch {
-        io-channels = <&adc 0>; // <--- see ain-map.png for nRF52840
-        mv-mid = <1630>;
-        mv-min-max = <1600>;
-        mv-deadzone = <10>;
-        scale-multiplier = <3>;
-        scale-divisor = <4>;
-        invert;
-        evt-type = <INPUT_EV_REL>;
-        input-code = <INPUT_REL_Y>;
+        compatible = "zmk,analog-input";
+        sampling-hz = <100>;
+        
+        x-ch {
+            io-channels = <&adc 5>; 
+            mv-mid = <1630>;
+            mv-min-max = <1600>;
+            mv-deadzone = <10>;
+            scale-multiplier = <1>;
+            scale-divisor = <70>; // 数値が大きいほど遅くなります
+            invert;
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_X>;
+        };
 
+        y-ch {
+            io-channels = <&adc 0>; 
+            mv-mid = <1630>;
+            mv-min-max = <1600>;
+            mv-deadzone = <10>;
+            scale-multiplier = <3>;
+            scale-divisor = <4>; // 現在の設定ではかなり速いです
+            invert;
+            evt-type = <INPUT_EV_REL>;
+            input-code = <INPUT_REL_Y>;
+        }; // ここを修正
+    }; // ここを修正
 
-    };
+    // キーマップの設定
+    keymap {
+        compatible = "zmk,keymap";
+        default_layer {
+            bindings = <
+                &kp N1    &kp N2    &kp N3
+                &kp N4    &mkp LCLK &kp N6   // 真ん中を左クリックに設定
+                &kp N7    &kp N8    &kp N9
+            >;
+        };
     };
 };
 
 &pointer_accel {
-    input-type = <INPUT_EV_REL>;  // For relative input devices
-    track-remainders;             // Accumulate fractional movements
-    min-factor = <800>;          // 0.8x at very slow speeds
-    max-factor = <3000>;         // 3.0x at fast speeds
-    speed-threshold = <1200>;     // 1200 counts/sec for 1x
-    speed-max = <6000>;          // 6000 counts/sec for max accel
-    acceleration-exponent = <2>;  // Quadratic acceleration curve
+    input-type = <INPUT_EV_REL>;
+    track-remainders;
+    min-factor = <800>;
+    max-factor = <3000>;
+    speed-threshold = <1200>;
+    speed-max = <6000>;
+    acceleration-exponent = <2>;
 };
 
 / {
@@ -95,8 +110,8 @@
         status = "okay";
         device = <&anin0>;
         input-processors 
-            = <&pointer_accel>      // Acceleration processor
-            ,<&zip_xy_transform>
-        ;
+            = <&pointer_accel>
+            , <&zip_xy_transform>
+            ;
     };
 };
