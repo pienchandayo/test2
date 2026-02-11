@@ -67,6 +67,7 @@
             scale-multiplier = <1>;
             scale-divisor = <200>;
             evt-type = <INPUT_EV_REL>;
+            invert;
             input-code = <INPUT_REL_Y>;
         };
     };
