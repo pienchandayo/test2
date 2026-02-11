@@ -51,9 +51,9 @@
         sampling-hz = <100>;
         x-ch {
             io-channels = <&adc 5>; 
-            mv-mid = <1630>;
+            mv-mid = <1650>;
             mv-min-max = <1600>;
-            mv-deadzone = <100>;
+            mv-deadzone = <10>;
             scale-multiplier = <1>;
             scale-divisor = <100>;
             evt-type = <INPUT_EV_REL>;
@@ -63,7 +63,7 @@
             io-channels = <&adc 0>; 
             mv-mid = <1630>;
             mv-min-max = <1600>;
-            mv-deadzone = <100>;
+            mv-deadzone = <10>;
             scale-multiplier = <1>;
             scale-divisor = <100>;
             evt-type = <INPUT_EV_REL>;
@@ -92,7 +92,7 @@
 &pointer_accel {
     input-type = <INPUT_EV_REL>;
     track-remainders;
-    min-factor = <800>;
+    min-factor = <500>;
     max-factor = <3000>;
     speed-threshold = <1200>;
     speed-max = <6000>;
