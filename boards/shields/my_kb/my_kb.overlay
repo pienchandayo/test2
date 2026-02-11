@@ -3,10 +3,11 @@
 #include <dt-bindings/zmk/keys.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
-// マウスプロセッサ関連のインクルード
+// 既存のRCマクロとの衝突を避けるための定義
+#define MAP(row, col) (row * 3 + col)
+
 #include <input/processors.dtsi>
-// 注意: このファイルが環境に存在しないとビルドエラーになります
-#include <behaviors/input_gestures_accel.dtsi> 
+#include <behaviors/input_gestures_accel.dtsi>
 
 &adc {
     status = "okay";
@@ -40,10 +41,11 @@
         compatible = "zmk,matrix-transform";
         columns = <3>;
         rows = <3>;
+        // RC(x,y) ではなく MAP(x,y) を使用して衝突を回避
         map = <
-            RC(0,0) RC(0,1) RC(0,2)
-            RC(1,0) RC(1,1) RC(1,2)
-            RC(2,0) RC(2,1) RC(2,2)
+            MAP(0,0) MAP(0,1) MAP(0,2)
+            MAP(1,0) MAP(1,1) MAP(1,2)
+            MAP(2,0) MAP(2,1) MAP(2,2)
         >;
     };
 
@@ -54,7 +56,6 @@
         kscan = <&kscan0>;
     };
 
-    // アナログ入力の設定
     anin0: analog_input_0 {
         compatible = "zmk,analog-input";
         sampling-hz = <100>;
@@ -84,7 +85,6 @@
         };
     };
 
-    // キーマップ
     keymap {
         compatible = "zmk,keymap";
         default_layer {
@@ -96,7 +96,6 @@
         };
     };
 
-    // 入力プロセッサの定義
     zip_xy_transform: zip_xy_transform {
         compatible = "zmk,input-processor-transform";
         #input-processor-cells = <0>;
@@ -105,7 +104,6 @@
         y-scale = <1>;
     };
 
-    // リスナーの設定
     tpad0: tpad0 {
         compatible = "zmk,input-listener";
         status = "okay";
@@ -117,7 +115,6 @@
     };
 };
 
-/* 外部ラベルの参照設定は最後に記述 */
 &pointer_accel {
     input-type = <INPUT_EV_REL>;
     track-remainders;
