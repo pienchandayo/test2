@@ -53,7 +53,7 @@
             io-channels = <&adc 5>; 
             mv-mid = <1630>;
             mv-min-max = <1600>;
-            mv-deadzone = <10>;
+            mv-deadzone = <100>;
             scale-multiplier = <1>;
             scale-divisor = <70>;
             invert;
@@ -64,7 +64,7 @@
             io-channels = <&adc 0>; 
             mv-mid = <1630>;
             mv-min-max = <1600>;
-            mv-deadzone = <10>;
+            mv-deadzone = <100>;
             scale-multiplier = <3>;
             scale-divisor = <4>;
             invert;
@@ -86,7 +86,6 @@
         device = <&anin0>;
         input-processors 
             = <&pointer_accel>
-            , <&zip_xy_transform 0>
             ;
     };
 };
