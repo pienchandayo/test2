@@ -4,23 +4,7 @@
 #include <dt-bindings/zmk/mouse.h> 
 
 
-/ {
-    keymap {
-        compatible = "zmk,keymap";
 
-        default_layer { // Layer 0
-            // -------------------------------------
-            // |     Z     |     M     |     K     |
-            // |     A     |     B     |     C     |
-            // |     D     |     E     |     F     |
-            bindings = <
-                &kp Z    &bt BT_CLR    &kp K
-                &kp A    &kp B    &kp C
-                &kp D    &kp E    &kp F
-            >;
-        };
-    };
- };
 
 / {
     keymap {
