@@ -97,6 +97,6 @@
         input-processors 
             = <&pointer_accel>      // Acceleration processor
             ,<&zip_xy_transform>
-        >;
+        ;
     };
 };
